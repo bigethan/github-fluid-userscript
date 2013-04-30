@@ -5,6 +5,7 @@ A userscript for managing a github repo a little easier (with a focus on pull re
 
 Features:
 - give it a list of usernames, and it'll:
--- badge the app when they submit a new pull request
--- note when one their pull requests is unread
+ - badge the app when they submit a new pull request
+ - note when one their pull requests is unread
 - If a word matches a specified pattern, it can create a link for that item.  Handy if you use http://foo.com/BUG-56 instead of gihub's issues
+- when a pull reuest comes it, it'll bounce the app's icon once in the dock.
