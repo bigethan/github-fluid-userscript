@@ -12,25 +12,16 @@
   var unreadCount = 0,
       watchUsers = ['an','array','of','github-usernames','that-will','badge-the-app','when-they-have-open-pulls'],
       bugNameRe = /([A-Z]{2,}-[0-9]{1,})/g, //regex to find mentioned bugs
-      bugRepoLinkRepl = '<a href="http://url.of.your.bug.tracker/view/$1">$1</a>';
-
-
-  var readNotifications = function() {
-    $.get('https://github.com/notifications', { cb :  Date.now() }, function (data) {
-      parseResponse(data, 'unread');
-    }, 'html');
-  };
+      bugRepoLinkRepl = '<a href="http://url.of.your.bug.tracker/view/$1">$1</a>',
+      reposToWatch = ['piece/of', 'url/that', 'sets/the/repo/to/track'],
+      allPullsUrl = 'https://github.com/your-account-here-perhaps/dashboard/pulls';
 
   var getPullRequests = function() {
-    $.get('https://github.com/trulia/web/pulls', { cb :  Date.now() }, function (data) {
-      parseResponse(data, 'webPulls');
-    }, 'html');
-    $.get('https://github.com/trulia/common/pulls', { cb :  Date.now() }, function (data) {
-      parseResponse(data, 'commonPulls');
-    }, 'html');
-    $.get('https://github.com/trulia/db_handle/pulls', { cb :  Date.now() }, function (data) {
-      parseResponse(data, 'db_handlePulls');
-    }, 'html');
+    $.each(reposToWatch, index, url) {
+      $.get('https://github.com/' + url + '/pulls', { cb :  Date.now() }, function (data) {
+        parseResponse(data, url);
+      }, 'html');
+    }
   };
 
   var parseResponse = function (data, type) {
@@ -47,7 +38,7 @@
   };
 
   var getUsersPullRequests = function(users) {
-    $.get('https://github.com/organizations/trulia/dashboard/pulls', { cb :  Date.now() }, function (data) {
+    $.get(allPullsUrl, { cb :  Date.now() }, function (data) {
       parseUserPullRequests(data, users);
     }, 'html');
   };
@@ -80,7 +71,7 @@
 
   var setBadge = function()
   {
-    //readNotifications();
+
     getUsersPullRequests(watchUsers);
     setTimeout(function(){
       var prevPulls = localStorage.getItem('prevuserPulls');
