@@ -13,29 +13,7 @@
       watchUsers = ['an','array','of','github-usernames','that-will','badge-the-app','when-they-have-open-pulls'],
       bugNameRe = /([A-Z]{2,}-[0-9]{1,})/g, //regex to find mentioned bugs
       bugRepoLinkRepl = '<a href="http://url.of.your.bug.tracker/view/$1">$1</a>',
-      reposToWatch = ['piece/of', 'url/that', 'sets/the/repo/to/track'],
       allPullsUrl = 'https://github.com/your-account-here-perhaps/dashboard/pulls';
-
-  var getPullRequests = function() {
-    $.each(reposToWatch, index, url) {
-      $.get('https://github.com/' + url + '/pulls', { cb :  Date.now() }, function (data) {
-        parseResponse(data, url);
-      }, 'html');
-    }
-  };
-
-  var parseResponse = function (data, type) {
-
-    var divs = $(data).filter(function(){ return $(this).is("div"); });
-
-    if(divs.length > 0) {
-      var unreadCount = parseInt(divs.first().find('li a .count').first().text(), 10);
-      var prevUnread = parseInt(localStorage.getItem(type), 10);
-      localStorage.setItem(type, unreadCount);
-      localStorage.setItem('prev' + type, prevUnread);
-      //console.log(type + ':' + unreadCount);
-    }
-  };
 
   var getUsersPullRequests = function(users) {
     $.get(allPullsUrl, { cb :  Date.now() }, function (data) {
