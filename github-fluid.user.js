@@ -72,7 +72,7 @@
     $('a').each(function(){
       var href = $(this).attr('href');
       if (href && (href.indexOf('pull') != -1 || href.indexOf('commit') != -1)) {
-        $(this).attr('href', href + '?w=1');
+        $(this).attr('href', href + '?w=0');
       }
     });
   };
