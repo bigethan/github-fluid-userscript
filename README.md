@@ -10,4 +10,4 @@ Features:
  - badge the app when they submit a new pull request
  - note when one their pull requests is unread
 - If a word matches a specified pattern, it can create a link for that item.  Handy if you use http://foo.com/BUG-56 instead of gihub's issues
-- when a pull reuest comes it, it'll bounce the app's icon once in the dock.
+- when a pull request comes in from one of your watched usernames it'll bounce the app's icon once in the dock.
