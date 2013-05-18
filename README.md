@@ -9,5 +9,7 @@ Features:
 - give it a list of usernames, and it'll:
  - badge the app when they submit a new pull request
  - note when one their pull requests is unread
-- If a word matches a specified pattern, it can create a link for that item.  Handy if you use http://foo.com/BUG-56 instead of gihub's issues
-- when a pull request comes in from one of your watched usernames it'll bounce the app's icon once in the dock.
+ - bounce the app's icon once in the dock when their pull request comes in
+
+- If a word matches a specified pattern, it can create a link for that item. So if you use http://foo.com/BUG-56 it'll convert mentions of BUG-56 into a link to that bug on foo.com
+
