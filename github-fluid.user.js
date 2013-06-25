@@ -1,8 +1,26 @@
 // ==UserScript==
 // @name        GithubHelper
-// @description Unread notifcation tracking and icon bouncing
+// @description Unread notifcation tracking and icon bouncing, and some visual tweaks.
+//add this to your userstyles
+//
+//  ::-webkit-scrollbar {
+//    -webkit-appearance: none;
+//    width: 8px;
+//  }
+//  
+//  ::-webkit-scrollbar-track {
+//    background-color: rgba(255,255,255, .6);
+//    border-radius: 8px;
+//  }
+//  ::-webkit-scrollbar-thumb {
+//    border-radius: 8px;
+//    background-color: rgba(106, 106, 106, .6);
+//  }
+//
+// To always show the scrollbars to easily see when code is wide.
+//
 // @namespace   http://bigethan.com/
-// @homepage    http://github.com/bigethan/github/
+// @homepage    https://github.com/bigethan/github-fluid-userscript
 // @author      Ethan Schlenker (inspired by Stephen Celis & Githubbub)
 // @include     http*://github.com/*
 // ==/UserScript==
@@ -66,17 +84,6 @@
 
   };
 
-  var noWhitespaceDiffs = function()
-  {
-    //github's pjax makes this not work
-    $('a').each(function(){
-      var href = $(this).attr('href');
-      if (href && (href.indexOf('pull') != -1 || href.indexOf('commit') != -1)) {
-        $(this).attr('href', href + '?w=0');
-      }
-    });
-  };
-
   var linkifyBugNames = function()
   {
     var dtt = $('.discussion-topic-title'),
@@ -99,11 +106,9 @@
 
 
   setBadge();
-  noWhitespaceDiffs();
   linkifyBugNames();
 
   setInterval(
     setBadge,
     90 * 1000);
 })();
-
