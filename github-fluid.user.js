@@ -2,6 +2,7 @@
 // @name        GithubHelper
 // @description Unread notifcation tracking and icon bouncing, and some visual tweaks.
 //add this to your userstyles
+//
 //  ::-webkit-scrollbar {
 //    -webkit-appearance: none;
 //    width: 8px;
@@ -16,13 +17,13 @@
 //    background-color: rgba(106, 106, 106, .6);
 //  }
 //
-// So that you can easily see when code is wide.
+// To always show the scrollbars to easily see when code is wide.
 // 
 // Add a bookmarklet of "javascript:hideOthers();" to hide the pull
 // requests of people you're not watching
 //
 // @namespace   http://bigethan.com/
-// @homepage    http://github.com/bigethan/github/
+// @homepage    https://github.com/bigethan/github-fluid-userscript
 // @author      Ethan Schlenker (inspired by Stephen Celis & Githubbub)
 // @include     http*://github.com/*
 // ==/UserScript==
@@ -30,17 +31,17 @@
 (function () {
 
   var unreadCount = 0,
-      watchUsers = ['michal-trulia','jake-trulia','vlum-trulia','mbarnicle-trulia','ethan-trulia','rfriberg-trulia'],
+      watchUsers = ['an','array','of','github-usernames','that-will','badge-the-app','when-they-have-open-pulls'],
       bugNameRe = /([A-Z]{2,}-[0-9]{1,})/g, //regex to find mentioned bugs
-      bugRepoLinkRepl = '<a href="http://jira.corp.trulia.com/jira/browse/$1">$1</a>',
-      reposToWatch = ['trulia/web', 'trulia/common', 'trulia/db_handle','trulia/webservice'],
-      allPullsUrl = 'https://github.com/organizations/trulia/dashboard/pulls';
+      bugRepoLinkRepl = '<a href="http://url.of.your.bug.tracker/view/$1">$1</a>',
+      allPullsUrl = 'https://github.com/your-account-here-perhaps/dashboard/pulls';
 
   var getUsersPullRequests = function(users) {
     $.get(allPullsUrl, { cb :  Date.now() }, function (data) {
       parseUserPullRequests(data, users);
     }, 'html');
   };
+
 
   var parseUserPullRequests = function(data, watchUsers) {
     var openPulls = 0,
@@ -106,6 +107,7 @@
     }
   };
 
+
   var makeHideOthers = function()
   {
     var script = document.createElement('script');
@@ -127,7 +129,6 @@
   setBadge();
   linkifyBugNames();
   makeHideOthers();
-
 
   setInterval(
     setBadge,
